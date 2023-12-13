@@ -1,3 +1,18 @@
+<?php
+require_once __DIR__ . "/function.php";
+
+$logged = null;
+
+if (isset($_POST["login"])) {
+    $login = $_POST["login"];
+    if ($login == EMAIL) {
+        $logged = true;
+    } else {
+        $logged = false;
+    };
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +22,14 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon1">invia</button>
-        <input type="text" class="form-control" placeholder="inserisci la tua email" aria-label="Example text with button addon" aria-describedby="button-addon1">
-    </div>
+    <form class="mt-5" action="index.php" method="POST">
+        <input type="text" class="form-control" placeholder="inserisci la tua email" aria-label="Example text with button addon" aria-describedby="button-addon1"  name="login">
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon1">invia</button>
+    </form>
+    <?php if (isset($_POST["login"])) { ?>
+        <div class="alert <?php echo (($logged) ? "alert-success" : "alert-danger"); ?>" >
+            <?php echo ($logged) ? "Accesso riuscito!" : "Accesso non riuscito. Controlla l'email e riprova."; ?>
+        </div>
+    <?php } ?>
 </body>
 </html>
