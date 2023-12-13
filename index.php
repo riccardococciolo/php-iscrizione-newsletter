@@ -1,14 +1,23 @@
 <?php
 require_once __DIR__ . "/function.php";
 
+session_start();
+
+if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
+    header('Location: ./thankyou.php');
+    die;
+}
+
 $logged = null;
 
 if (isset($_POST["login"])) {
     $login = $_POST["login"];
     if ($login == EMAIL) {
         $logged = true;
+        $_SESSION["auth"] = true;
     } else {
         $logged = false;
+        $_SESSION["auth"] = false;
     };
 }
 ?>
