@@ -9,6 +9,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
 }
 
 $logged = null;
+$input_value = "";
 
 if (isset($_POST["login"])) {
     $login = $_POST["login"];
@@ -18,6 +19,7 @@ if (isset($_POST["login"])) {
     } else {
         $logged = false;
         $_SESSION["auth"] = false;
+        $input_value = $login;
     };
 }
 ?>
@@ -32,7 +34,7 @@ if (isset($_POST["login"])) {
 </head>
 <body>
     <form class="mt-5" action="index.php" method="POST">
-        <input type="text" class="form-control" placeholder="inserisci la tua email" aria-label="Example text with button addon" aria-describedby="button-addon1"  name="login">
+        <input type="text" class="form-control" placeholder="inserisci la tua email" aria-label="Example text with button addon" aria-describedby="button-addon1"  name="login" value="<?php echo $input_value; ?>">
         <button class="btn btn-outline-secondary" type="submit" id="button-addon1">invia</button>
     </form>
     <?php if (isset($_POST["login"])) { ?>
